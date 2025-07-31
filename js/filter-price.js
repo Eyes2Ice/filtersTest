@@ -1,31 +1,12 @@
-function applyPriceFilter(min, max) {
-    const products = document.querySelectorAll('.catalog-list__item');
-    let anyVisible = false;
-
-    products.forEach(product => {
-        const price = parseFloat(product.dataset.price);
-        let visible = true;
-
-        // Проверка минимальной цены
-        if (!isNaN(min) && price < min) {
-            visible = false;
-        }
-
-        // Проверка максимальной цены
-        if (!isNaN(max) && price > max) {
-            visible = false;
-        }
-
-        // Применение видимости
-        product.style.display = visible ? '' : 'none';
-        if (visible) anyVisible = true;
-    });
-
-    // Показ сообщения, если ничего не найдено
-    const noResults = document.getElementById('no-results');
-    if (noResults) {
-        noResults.style.display = anyVisible ? 'none' : 'block';
-    }
+function applyPriceFilter(minPrice, maxPrice) {
+  filterProducts(item => {
+    const price = parseFloat(item.dataset.price);
+    
+    if (!isNaN(minPrice) && price < minPrice) return false;
+    if (!isNaN(maxPrice) && price > maxPrice) return false;
+    
+    return true;
+  }, { animationDuration: 300 });
 }
 
 // Обработчик для кнопки "ОК"
