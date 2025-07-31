@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Парной краб</title>
+
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <div class="container">
+          <div class="header__inner">
+            <h1 class="header__title">Каталог</h1>
+            <ul class="header__categories-list">
+              <li class="header__categories-list-item">
+                <a href="#">Морепродукты</a>
+              </li>
+              <li class="header__categories-list-item"><a href="#">Икра</a></li>
+              <li class="header__categories-list-item"><a href="#">Рыба</a></li>
+              <li class="header__categories-list-item">
+                <a href="#">Полуфабрикаты</a>
+              </li>
+              <li class="header__categories-list-item">
+                <a href="#">Соусы</a>
+              </li>
+              <li class="header__categories-list-item">
+                <a href="#">Напитки</a>
+              </li>
+              <li class="header__categories-list-item">
+                <a href="#">Витамины</a>
+              </li>
+              <li class="header__categories-list-item">
+                <a href="#"> Шашлыки в городе у моря </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <main>
+        <section class="main__catalog catalog">
+          <div class="catalog__inner">
+            <div class="catalog__filters filters">
+              <div class="filters__body">
+                <ul class="filters__option-group">
+                  <li class="filters__option-item">
+                    <!-- Фильтр по цене -->
+                    <button class="filters__option-item-btn filter-toggle" data-filter="price">Цена</button>
+                    <div class="filter-dropdown" id="price-dropdown">
+                      <div class="price-inputs">
+                        <input type="number" id="min-price" placeholder="Минимальная цена">
+                        <span class="price-separator">—</span>
+                        <input type="number" id="max-price" placeholder="Максимальная цена">
+                        <button class="apply-filter">ОК</button>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <ul class="catalog-list">
+              <li class="catalog-list__item" data-price="6000">
+                <img class="catalog-list__item-img" src="./img/keta.jpg" alt="" />
+                <div class="catalog-list__item-content">
+                  <h3 class="catalog-list__item-title">
+                    Красная икра кеты 2025 год (500гр)
+                  </h3>
+                  <div class="catalog-list__item-weight">500 гр</div>
+                  <div class="catalog-list__item-price">6000 р.</div>
+                </div>
+              </li>
+              <li class="catalog-list__item" data-price="5000">
+                <img class="catalog-list__item-img" src="./img/keta.jpg" alt="" />
+                <div class="catalog-list__item-content">
+                  <h3 class="catalog-list__item-title">
+                    Красная икра кеты 2025 год (500гр)
+                  </h3>
+                  <div class="catalog-list__item-weight">500 гр</div>
+                  <div class="catalog-list__item-price">5000 р.</div>
+                </div>
+              </li>
+              <li class="catalog-list__item" data-price="4000">
+                <img class="catalog-list__item-img" src="./img/keta.jpg" alt="" />
+                <div class="catalog-list__item-content">
+                  <h3 class="catalog-list__item-title">
+                    Красная икра кеты 2025 год (500гр)
+                  </h3>
+                  <div class="catalog-list__item-weight">500 гр</div>
+                  <div class="catalog-list__item-price">4000 р.</div>
+                </div>
+              </li>
+              <li class="catalog-list__item" data-price="3800">
+                <img class="catalog-list__item-img" src="./img/keta.jpg" alt="" />
+                <div class="catalog-list__item-content">
+                  <h3 class="catalog-list__item-title">
+                    Красная икра кеты 2025 год (500гр)
+                  </h3>
+                  <div class="catalog-list__item-weight">500 гр</div>
+                  <div class="catalog-list__item-price">3800 р.</div>
+                </div>
+              </li>
+              <li class="catalog-list__item" data-price="2500">
+                <img class="catalog-list__item-img" src="./img/keta.jpg" alt="" />
+                <div class="catalog-list__item-content">
+                  <h3 class="catalog-list__item-title">
+                    Красная икра кеты 2025 год (500гр)
+                  </h3>
+                  <div class="catalog-list__item-weight">500 гр</div>
+                  <div class="catalog-list__item-price">2500 р.</div>
+                </div>
+              </li>
+              <li class="catalog-list__item" data-price="1500">
+                <img class="catalog-list__item-img" src="./img/keta.jpg" alt="" />
+                <div class="catalog-list__item-content">
+                  <h3 class="catalog-list__item-title">
+                    Красная икра кеты 2025 год (500гр)
+                  </h3>
+                  <div class="catalog-list__item-weight">500 гр</div>
+                  <div class="catalog-list__item-price">1500 р.</div>
+                </div>
+              </li>
+              <li class="catalog-list__item" data-price="899">
+                <img class="catalog-list__item-img" src="./img/keta.jpg" alt="" />
+                <div class="catalog-list__item-content">
+                  <h3 class="catalog-list__item-title">
+                    Красная икра кеты 2025 год (500гр)
+                  </h3>
+                  <div class="catalog-list__item-weight">500 гр</div>
+                  <div class="catalog-list__item-price">899 р.</div>
+                </div>
+              </li>
+              <li class="catalog-list__item" data-price="1799">
+                <img class="catalog-list__item-img" src="./img/keta.jpg" alt="" />
+                <div class="catalog-list__item-content">
+                  <h3 class="catalog-list__item-title">
+                    Красная икра кеты 2025 год (500гр)
+                  </h3>
+                  <div class="catalog-list__item-weight">500 гр</div>
+                  <div class="catalog-list__item-price">1799 р.</div>
+                </div>
+              </li>
+              <li class="catalog-list__item" data-price="7549">
+                <img class="catalog-list__item-img" src="./img/keta.jpg" alt="" />
+                <div class="catalog-list__item-content">
+                  <h3 class="catalog-list__item-title">
+                    Красная икра кеты 2025 год (500гр)
+                  </h3>
+                  <div class="catalog-list__item-weight">500 гр</div>
+                  <div class="catalog-list__item-price">7549 р.</div>
+                </div>
+              </li>
+              <li class="catalog-list__item" data-price="8999">
+                <img class="catalog-list__item-img" src="./img/keta.jpg" alt="" />
+                <div class="catalog-list__item-content">
+                  <h3 class="catalog-list__item-title">
+                    Красная икра кеты 2025 год (500гр)
+                  </h3>
+                  <div class="catalog-list__item-weight">500 гр</div>
+                  <div class="catalog-list__item-price">8999 р.</div>
+                </div>
+              </li>
+              <li class="catalog-list__item" data-price="3449">
+                <img class="catalog-list__item-img" src="./img/keta.jpg" alt="" />
+                <div class="catalog-list__item-content">
+                  <h3 class="catalog-list__item-title">
+                    Красная икра кеты 2025 год (500гр)
+                  </h3>
+                  <div class="catalog-list__item-weight">500 гр</div>
+                  <div class="catalog-list__item-price">3499 р.</div>
+                </div>
+              </li>
+              <li class="catalog-list__item" data-price="659">
+                <img class="catalog-list__item-img" src="./img/keta.jpg" alt="" />
+                <div class="catalog-list__item-content">
+                  <h3 class="catalog-list__item-title">
+                    Красная икра кеты 2025 год (500гр)
+                  </h3>
+                  <div class="catalog-list__item-weight">500 гр</div>
+                  <div class="catalog-list__item-price">659 р.</div>
+                </div>
+              </li>
+            </ul>
+          </div class="catalog__inner">
+        </section>
+      </main>
+    </div>
+
+    <script src="./js/price-filter.js"></script>
+    <script src="./js/main.js"></script>
+  </body>
+</html>

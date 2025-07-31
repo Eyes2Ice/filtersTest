@@ -1,0 +1,161 @@
+.wrapper {
+  min-height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  max-width: 1310px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+body {
+  background-color: #01011e;
+  color: #ffff;
+}
+
+.header__inner {
+  margin-top: 40px;
+}
+
+.header__title {
+  font-size: 48px;
+  text-align: center;
+}
+
+.header__categories-list {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 60px;
+}
+
+.header__categories-list-item a {
+  display: block;
+  border: solid 1px #ffff;
+  border-radius: 30px;
+  padding: 15px 20px;
+  transition: all 0.5s;
+}
+
+.header__categories-list-item a:hover {
+  background-color: #d60014;
+}
+
+
+/* ============================================= */
+
+.catalog__inner {
+  margin-top: 100px;
+  margin-inline: 25px;
+
+}
+
+.filters__option-item {
+  position: relative;
+}
+
+.filters__option-item-btn {
+  background-color: transparent;
+  font-size: 20px;
+  color: #ffff;
+}
+
+.filter-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  min-width: 250px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+.filter-dropdown.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.price-inputs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.price-inputs input {
+  width: 100px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.price-separator {
+  color: black;
+}
+
+.apply-filter {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.3s;
+}
+
+/* ============================================= */
+
+
+.catalog-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  gap: 15px;
+  margin-top: 40px;
+}
+
+.catalog-list__item {
+  max-width: 500px;
+  aspect-ratio: 1;
+}
+
+.catalog-list__item-img {
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 30px;
+}
+
+.catalog-list__item-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.catalog-list__item-title {
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.catalog-list__item-weight {
+  font-weight: 300;
+  margin-bottom: 15px;
+}
+
+.catalog-list__item-price {
+  font-weight: 700;
+}
+
+
