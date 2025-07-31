@@ -76,4 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         applyPriceFilter(min, max);
     }
+
+    
 });

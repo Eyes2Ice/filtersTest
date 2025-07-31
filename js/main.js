@@ -75,27 +75,4 @@ document.addEventListener('DOMContentLoaded', () => {
     
     activeFilter = null;
   }
-
-  // В обработчике для кнопки "ОК" фильтра по цене
-document.querySelector('.apply-filter').addEventListener('click', function(e) {
-  e.stopPropagation();
-  
-  const minPrice = parseFloat(document.getElementById('min-price').value);
-  const maxPrice = parseFloat(document.getElementById('max-price').value);
-  
-  // Валидация
-  if (isNaN(minPrice) && isNaN(maxPrice)) {
-    alert('Введите хотя бы одно значение цены');
-    return;
-  }
-  
-  if (!isNaN(minPrice) && !isNaN(maxPrice) && minPrice > maxPrice) {
-    alert('Минимальная цена не может быть больше максимальной');
-    return;
-  }
-  
-  // Закрываем меню после применения
-  closeActiveFilter();
-});
-
 });
