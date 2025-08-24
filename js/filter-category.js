@@ -3,16 +3,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const categoryCheckboxes = document.querySelectorAll(
     'input[name="category"]'
   );
-  const selectAllBtn = document.querySelector(".filter-select-all");
-  const resetBtn = document.querySelector(".filter-reset");
   const selectedCategoriesList = document.querySelector(
     ".selected-categories-list"
   );
   const selectedCategoriesContainer = document.querySelector(
     ".selected-categories"
   );
-  const filterIndicator = document.querySelector(".filter-indicator");
-  const categorySearch = document.querySelector(".filter-search-input");
 
   // Массив для хранения выбранных категорий
   let selectedCategories = [];
@@ -22,34 +18,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Функция инициализации фильтра
   function initCategoryFilter() {
-    // Инициализируем все товары как видимые
-    const products = document.querySelectorAll(".catalog-list__item");
-    products.forEach((product) => {
-      product.classList.add("catalog-list__item--visible");
-    });
-
     // Обработчики для чекбоксов
     categoryCheckboxes.forEach((checkbox) => {
       checkbox.addEventListener("change", handleCategoryChange);
     });
 
-    // Обработчики для кнопок
-    if (selectAllBtn) {
-      selectAllBtn.addEventListener("click", selectAllCategories);
-    }
-
-    if (resetBtn) {
-      resetBtn.addEventListener("click", resetCategories);
-    }
-
-    // Обработчик для поиска
-    if (categorySearch) {
-      categorySearch.addEventListener("input", filterCategoriesBySearch);
-    }
-
     // Применяем начальное состояние
     updateSelectedCategoriesUI();
-    applyCategoryFilter();
   }
 
   // Обработчик изменения состояния чекбокса
@@ -76,46 +51,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Функция применения фильтра по категориям
   function applyCategoryFilter() {
-    const products = document.querySelectorAll(".catalog-list__item");
+    // Отправляем событие в менеджер фильтров
+    document.dispatchEvent(
+      new CustomEvent("categoryFilterChanged", {
+        detail: [...selectedCategories],
+      })
+    );
 
-    // Если не выбрано ни одной категории - показываем все товары
-    if (selectedCategories.length === 0) {
-      products.forEach((product) => {
-        product.classList.remove(
-          "catalog-list__item--hidden",
-          "catalog-list__item--hiding"
-        );
-        product.classList.add("catalog-list__item--visible");
-      });
-      if (filterIndicator) filterIndicator.classList.remove("visible");
-      return;
-    }
-
-    // Показываем индикатор активного фильтра
-    if (filterIndicator) filterIndicator.classList.add("visible");
-
-    // Фильтруем товары
-    products.forEach((product) => {
-      const productCategory = product.dataset.category;
-
-      if (selectedCategories.includes(productCategory)) {
-        product.classList.remove(
-          "catalog-list__item--hidden",
-          "catalog-list__item--hiding"
-        );
-        product.classList.add("catalog-list__item--visible");
-      } else {
-        product.classList.add("catalog-list__item--hidden");
-        product.classList.remove("catalog-list__item--visible");
-      }
-    });
-
-    // Обновляем счетчик товаров
-    updateProductsCounter();
+    // Обновляем UI выбранных категорий
+    updateSelectedCategoriesUI();
   }
 
   // Обновление UI выбранных категорий
   function updateSelectedCategoriesUI() {
+    if (!selectedCategoriesList || !selectedCategoriesContainer) return;
+
     // Очищаем список
     selectedCategoriesList.innerHTML = "";
 
@@ -171,65 +121,5 @@ document.addEventListener("DOMContentLoaded", function () {
     // Обновляем UI и применяем фильтр
     updateSelectedCategoriesUI();
     applyCategoryFilter();
-  }
-
-  // Выбор всех категорий
-  function selectAllCategories() {
-    selectedCategories = [];
-
-    categoryCheckboxes.forEach((checkbox) => {
-      checkbox.checked = true;
-      selectedCategories.push(checkbox.value);
-    });
-
-    updateSelectedCategoriesUI();
-    applyCategoryFilter();
-  }
-
-  // Сброс всех категорий
-  function resetCategories() {
-    selectedCategories = [];
-
-    categoryCheckboxes.forEach((checkbox) => {
-      checkbox.checked = false;
-    });
-
-    updateSelectedCategoriesUI();
-    applyCategoryFilter();
-  }
-
-  // Фильтрация категорий по поисковому запросу
-  function filterCategoriesBySearch() {
-    const searchTerm = categorySearch.value.toLowerCase();
-    const categories = document.querySelectorAll(".filter-checkbox");
-
-    categories.forEach((category) => {
-      const label = category.querySelector(".filter-checkbox-label");
-      const text = label.textContent.toLowerCase();
-
-      if (text.includes(searchTerm)) {
-        category.style.display = "flex";
-      } else {
-        category.style.display = "none";
-      }
-    });
-  }
-
-  // Обновление счетчика товаров
-  function updateProductsCounter() {
-    const visibleProducts = document.querySelectorAll(
-      ".catalog-list__item:not(.catalog-list__item--hidden)"
-    );
-    const counterElement = document.getElementById("products-count");
-    const noResultsElement = document.getElementById("no-results");
-
-    if (counterElement) {
-      counterElement.textContent = visibleProducts.length;
-    }
-
-    if (noResultsElement) {
-      noResultsElement.style.display =
-        visibleProducts.length === 0 ? "block" : "none";
-    }
   }
 });
