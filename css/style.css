@@ -55,6 +55,12 @@ body {
 
 }
 
+.filters__body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .filters__option-group {
   display: flex;
   max-width: 500px;
@@ -359,4 +365,117 @@ body {
   display: inline-block;
 }
 
+.search-container {
+  position: relative;
+  max-width: 300px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 40px 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.search-clear {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #999;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: none;
+}
+
+.search-clear.visible {
+  display: block;
+}
+
+.search-clear:hover {
+  color: #333;
+}
+
+.filters__search-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: black;
+}
+
+.filter-group .sort-select-wrapper {
+  position: relative;
+  display: inline-block;
+  min-width: 200px;
+}
+
+.filter-group .sort-select-wrapper::after {
+  content: "▼";
+  font-size: 12px;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #666;
+}
+
+.sort-select {
+  width: 100%;
+  padding: 10px 35px 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  font-size: 14px;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.sort-select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.sort-select:hover {
+  border-color: #bbb;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .filter-group .sort-select-wrapper {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .filter-dropdown {
+    width: 100%;
+    left: 0;
+    right: 0;
+  }
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+  .search-container {
+    max-width: 100%;
+  }
+}
 

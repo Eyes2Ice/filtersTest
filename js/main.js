@@ -75,4 +75,55 @@ document.addEventListener('DOMContentLoaded', () => {
     
     activeFilter = null;
   }
+
+function setDataPositionAttributes(maxAttempts = 10, attempt = 1) {
+  // Получаем все элементы с классом catalog-list__item
+  const items = document.querySelectorAll('.catalog-list__item');
+  
+  // Если элементы не найдены, пытаемся снова через некоторое время
+  if (items.length === 0 && attempt <= maxAttempts) {
+    console.log(`Попытка ${attempt}/${maxAttempts}: элементы не найдены, повтор через 500мс...`);
+    setTimeout(() => setDataPositionAttributes(maxAttempts, attempt + 1), 500);
+    return;
+  }
+  
+  // Если достигнут лимит попыток
+  if (items.length === 0) {
+    console.error('Элементы с классом catalog-list__item не найдены после всех попыток');
+    return;
+  }
+
+  // Проходим по каждому элементу и устанавливаем data-position
+  items.forEach((item, index) => {
+    // Устанавливаем data-position, начиная с 1 (index + 1)
+    item.setAttribute('data-position', index + 1);
+  });
+}
+
+// Вызываем функцию при загрузке DOM
+document.addEventListener('DOMContentLoaded', function() {
+  setDataPositionAttributes();
+});
+
+// Также вызываем функцию при изменении DOM (если товары загружаются динамически)
+const observer = new MutationObserver(function(mutations) {
+  mutations.forEach(function(mutation) {
+    if (mutation.addedNodes.length) {
+      // Проверяем, были ли добавлены элементы каталога
+      const catalogItems = document.querySelectorAll('.catalog-list__item');
+      const hasPosition = catalogItems[0] && catalogItems[0].hasAttribute('data-position');
+      
+      if (catalogItems.length > 0 && !hasPosition) {
+        setDataPositionAttributes();
+      }
+    }
+  });
+});
+
+// Начинаем наблюдение за изменениями в DOM
+observer.observe(document.body, {
+  childList: true,
+  subtree: true
+});
+
 });
