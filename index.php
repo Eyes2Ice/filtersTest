@@ -118,7 +118,8 @@
                         </ul>
                     </div>
                 </div>
-                <ul class="catalog-list">
+                <?php echo do_shortcode('[catalog_products]'); ?>
+                <!-- <ul class="catalog-list">
                     <li class="catalog-list__item" data-price="6000" data-category="caviar"
                         data-name="Красная икра кеты 2025 год (500гр)">
                         <img class="catalog-list__item-img" src="<?php echo get_template_directory_uri() ?>/img/keta.jpg" alt="" />
@@ -281,7 +282,7 @@
                             <div class="catalog-list__item-price">500 р.</div>
                         </div>
                     </li>
-                </ul>
+                </ul> -->
             </div class="catalog__inner">
         </section>
     </main>
