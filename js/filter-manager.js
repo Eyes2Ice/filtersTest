@@ -136,15 +136,27 @@ class FilterManager {
         return false;
     }
 
-    // Проверка фильтра по категориям
+    // Проверка фильтра по категориям (поддержка нескольких категорий через запятую)
     if (this.filters.category.length > 0) {
-      const productCategory = product.dataset.category;
-      if (!this.filters.category.includes(productCategory)) return false;
+      const productCategoriesRaw = product.dataset.category || "";
+      const productCategories = productCategoriesRaw
+        .split(",")
+        .map((c) => c.trim())
+        .filter(Boolean);
+
+      // Совпадение по логике ИЛИ: товар подходит, если у него есть хотя бы одна из выбранных категорий
+      const hasAnySelected = productCategories.some((c) =>
+        this.filters.category.includes(c)
+      );
+      if (!hasAnySelected) return false;
     }
 
-    // Проверка поискового фильтра
+    // Проверка поискового фильтра (устойчиво к отсутствию data-name)
     if (this.filters.search.trim() !== "") {
-      const productName = product.dataset.name.toLowerCase();
+      const nameSource =
+        product.dataset.name || product.dataset.title ||
+        (product.querySelector(".catalog-list__item-title")?.textContent || "");
+      const productName = nameSource.toLowerCase();
       const searchTerm = this.filters.search.toLowerCase();
       if (!productName.includes(searchTerm)) return false;
     }
@@ -161,16 +173,37 @@ class FilterManager {
     );
 
     // Сортируем видимые товары
+    const getCreatedTime = (el) => {
+      // Ожидаем data-created (ISO или timestamp) или data-date
+      const raw = el.dataset.created || el.dataset.date || "";
+      const parsed = Date.parse(raw);
+      if (!Number.isNaN(parsed)) return parsed;
+      // Фолбэк: индекс исходного порядка
+      return this.originalOrder.indexOf(el);
+    };
+
     visibleProducts.sort((a, b) => {
       switch (this.filters.sort) {
         case "price:asc":
           return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
         case "price:desc":
           return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
-        case "title:asc":
-          return a.dataset.name.localeCompare(b.dataset.name);
-        case "title:desc":
-          return b.dataset.name.localeCompare(a.dataset.name);
+        case "title:asc": {
+          const an = (a.dataset.name || a.dataset.title || "").toString();
+          const bn = (b.dataset.name || b.dataset.title || "").toString();
+          return an.localeCompare(bn);
+        }
+        case "title:desc": {
+          const an = (a.dataset.name || a.dataset.title || "").toString();
+          const bn = (b.dataset.name || b.dataset.title || "").toString();
+          return bn.localeCompare(an);
+        }
+        case "created:desc":
+          // Сперва новые (более поздняя дата выше)
+          return getCreatedTime(b) - getCreatedTime(a);
+        case "created:asc":
+          // Сперва старые (более ранняя дата выше)
+          return getCreatedTime(a) - getCreatedTime(b);
         default:
           return 0;
       }
